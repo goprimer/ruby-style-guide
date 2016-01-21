@@ -1,7 +1,15 @@
++# Which Guide Should I Use?
+ +
+ +If you are looking for a guide on how to format your code or general style for ruby code, **you should be using this guide**.
+ +
+ +If you are looking for a guide on which methods you should be using, deciding how to organize your code/files, or any other rails specific items, **you shold be using the [rails-style-guide](https://github.com/goprimer/rails-style-guide)**.
+
 # Prelude
 
 > Role models are important. <br>
 > -- Officer Alex J. Murphy / RoboCop
+
+This guide was originally based off of [bbatsov's ruby-style-guide](https://github.com/bbatsov/ruby-style-guide).
 
 One thing has always bothered me as a Ruby developer - Python developers have a
 great programming style reference
@@ -63,19 +71,6 @@ You can generate a PDF or an HTML copy of this guide using
 
 [RuboCop][] is a code analyzer, based on this
 style guide.
-
-Translations of the guide are available in the following languages:
-
-* [Chinese Simplified](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
-* [Chinese Traditional](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
-* [French](https://github.com/gauthier-delacroix/ruby-style-guide/blob/master/README-frFR.md)
-* [German](https://github.com/arbox/de-ruby-style-guide/blob/master/README-deDE.md)
-* [Japanese](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
-* [Korean](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
-* [Portuguese](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
-* [Russian](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
-* [Spanish](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
-* [Vietnamese](https://github.com/scrum2b/ruby-style-guide/blob/master/README-viVN.md)
 
 ## Table of Contents
 
@@ -228,10 +223,10 @@ Translations of the guide are available in the following languages:
 
   `{` and `}` deserve a bit of clarification, since they are used
   for block and hash literals, as well as string interpolation.
-  For hash literals two styles are considered acceptable.
+  For hash literals you should have no space before or after.
 
   ```Ruby
-  # good - space after { and before }
+  # bad - space after { and before }
   { one: 1, two: 2 }
 
   # good - no space after { and before }
@@ -239,9 +234,9 @@ Translations of the guide are available in the following languages:
   ```
 
   The first variant is slightly more readable (and arguably more
-  popular in the Ruby community in general). The second variant has
+  popular in the Ruby community in general). However, the second variant has
   the advantage of adding visual difference between block and hash
-  literals. Whichever one you pick - apply it consistently.
+  literals.
 
 * <a name="no-spaces-braces"></a>
   No spaces after `(`, `[` or before `]`, `)`.
@@ -454,7 +449,7 @@ Translations of the guide are available in the following languages:
     good - leading `.` (Option A) and trailing `.` (Option B).
 <sup>[[link](#consistent-multi-line-chains)]</sup>
 
-  * **(Option A)** When continuing a chained method invocation on
+  * When continuing a chained method invocation on
     another line keep the `.` on the second line.
 
     ```Ruby
@@ -466,23 +461,6 @@ Translations of the guide are available in the following languages:
     one.two.three
       .four
     ```
-
-  * **(Option B)** When continuing a chained method invocation on another line,
-    include the `.` on the first line to indicate that the
-    expression continues.
-
-    ```Ruby
-    # bad - need to read ahead to the second line to know that the chain continues
-    one.two.three
-      .four
-
-    # good - it's immediately clear that the expression continues beyond the first line
-    one.two.three.
-      four
-    ```
-
-  A discussion on the merits of both alternative styles can be found
-  [here](https://github.com/bbatsov/ruby-style-guide/pull/176).
 
 * <a name="no-double-indent"></a>
     Align the parameters of a method call if they span more than one
@@ -506,7 +484,7 @@ Translations of the guide are available in the following languages:
         body: source.text)
   end
 
-  # good
+  # bad
   def send_mail(source)
     Mailer.deliver(to: 'bob@example.com',
                    from: 'us@example.com',
@@ -534,16 +512,16 @@ Translations of the guide are available in the following languages:
   menu_item = ['Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
     'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam']
 
+  # bad
+  menu_item =
+    ['Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
+    'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam']
+
   # good
   menu_item = [
     'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
     'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam'
   ]
-
-  # good
-  menu_item =
-    ['Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam',
-     'Baked beans', 'Spam', 'Spam', 'Spam', 'Spam', 'Spam']
   ```
 
 * <a name="underscores-in-numerics"></a>
@@ -563,9 +541,9 @@ Translations of the guide are available in the following languages:
     empty line between the comment block and the `def`.
 <sup>[[link](#rdoc-conventions)]</sup>
 
-* <a name="80-character-limits"></a>
-  Limit lines to 80 characters.
-<sup>[[link](#80-character-limits)]</sup>
+* <a name="110-character-limits"></a>
+  Limit lines to 110 characters.
+<sup>[[link](#110-character-limits)]</sup>
 
 * <a name="no-trailing-whitespace"></a>
   Avoid trailing whitespace.
@@ -955,9 +933,6 @@ Translations of the guide are available in the following languages:
 
   # good
   do_something if some_condition
-
-  # another good option
-  some_condition && do_something
   ```
 
 * <a name="no-multiline-if-modifiers"></a>
@@ -1005,9 +980,6 @@ Translations of the guide are available in the following languages:
 
   # good
   do_something unless some_condition
-
-  # another good option
-  some_condition || do_something
   ```
 
 * <a name="no-else-with-unless"></a>
@@ -1445,14 +1417,15 @@ condition](#safe-assignment-in-condition).
   # bad
   something = something ? something.downcase : nil
 
-  # ok
-  something = something.downcase if something
-
-  # good
+  # bad
   something = something && something.downcase
 
-  # better
+  # ok
   something &&= something.downcase
+
+  # good
+  something = something.downcase if something
+
   ```
 
 * <a name="no-case-equality"></a>
@@ -2746,12 +2719,12 @@ no parameters.
 
   ```Ruby
   # bad
-  raise SomeException.new('message')
-  # Note that there is no way to do `raise SomeException.new('message'), backtrace`.
-
-  # good
   raise SomeException, 'message'
   # Consistent with `raise SomeException, 'message', backtrace`.
+
+  # good
+  raise SomeException.new('message')
+  # Note that there is no way to do `raise SomeException.new('message'), backtrace`.
   ```
 
 * <a name="no-return-ensure"></a>
@@ -3078,7 +3051,7 @@ resource cleanup when possible.
   hash = { :one => 1, :two => 2, :three => 3 }
 
   # good
-  hash = { one: 1, two: 2, three: 3 }
+  hash = {one: 1, two: 2, three: 3}
   ```
 
 * <a name="no-mixed-hash-syntaces"></a>
@@ -3089,10 +3062,10 @@ resource cleanup when possible.
 
   ```Ruby
   # bad
-  { a: 1, 'b' => 2 }
+  {a: 1, 'b' => 2}
 
   # good
-  { :a => 1, 'b' => 2 }
+  {:a => 1, 'b' => 2}
   ```
 
 * <a name="hash-key"></a>
@@ -3235,19 +3208,20 @@ resource cleanup when possible.
 ## Strings
 
 * <a name="string-interpolation"></a>
-  Prefer string interpolation and string formatting instead of string
-  concatenation:
+  Prefer string interpolation instead of string
+  concatenation and string formatting:
 <sup>[[link](#string-interpolation)]</sup>
 
   ```Ruby
   # bad
   email_with_name = user.name + ' <' + user.email + '>'
 
+  # bad
+  email_with_name = format('%s <%s>', user.name, user.email)
+
   # good
   email_with_name = "#{user.name} <#{user.email}>"
 
-  # good
-  email_with_name = format('%s <%s>', user.name, user.email)
   ```
 
 * <a name="pad-string-interpolation"></a>
@@ -3292,6 +3266,8 @@ resource cleanup when possible.
     ```
 
   The string literals in this guide are aligned with the first style.
+
+  TODO: Primer make a decision about this.
 
 * <a name="no-character-literals"></a>
   Don't use the character literal syntax `?x`. Since Ruby 1.9 it's basically
@@ -3868,12 +3844,6 @@ checker based on this style guide. RuboCop already covers a
 significant portion of the Guide, supports both MRI 1.9 and MRI 2.0
 and has good Emacs integration.
 
-### RubyMine
-
-[RubyMine](http://www.jetbrains.com/ruby/)'s code inspections are
-[partially based](http://confluence.jetbrains.com/display/RUBYDEV/RubyMine+Inspections)
-on this guide.
-
 # Contributing
 
 The guide is still a work in progress - some rules are lacking examples, some
@@ -3888,17 +3858,9 @@ together with everyone interested in Ruby coding style, so that we could
 ultimately create a resource that will be beneficial to the entire Ruby
 community.
 
-Feel free to open tickets or send pull requests with improvements. Thanks in
-advance for your help!
-
-You can also support the project (and RuboCop) with financial
-contributions via [Gratipay](https://gratipay.com/~bbatsov/).
-
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/~bbatsov/)
-
 ## How to Contribute?
 
-It's easy, just follow the [contribution guidelines](https://github.com/bbatsov/ruby-style-guide/blob/master/CONTRIBUTING.md).
+It's easy, just create a new pull request and tag the relevant people! If it requires more discussion we can talk during our next engineering lunch.
 
 # License
 
